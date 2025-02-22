@@ -11,7 +11,7 @@ const uri = `${process.env.MONGO_URI}`;
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+const PORT = 3333;
 app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
@@ -28,8 +28,8 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const db = await client.connect();
-    const taskCollection = db.db("To-do").collection("tasks");
-    const userCollection = db.db("To-do").collection("users");
+    const taskCollection = db.db("Tasklist").collection("tasks");
+    const userCollection = db.db("Tasklist").collection("users");
 
     // POST route to add a task
     // app.post("/tasks", async (req, res) => {
@@ -189,6 +189,6 @@ async function run() {
   }
 }
 
-// run().catch(console.dir);
+run().catch(console.dir);
 
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
